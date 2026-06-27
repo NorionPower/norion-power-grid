@@ -287,6 +287,25 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── VIDEO ── */}
+      <section className="py-24 px-6 md:px-12" style={{ backgroundColor: GRAPHITE }}>
+        <div className="max-w-5xl mx-auto text-center">
+          <p className="font-mono text-xs tracking-[0.25em] uppercase mb-4" style={{ color: BRASS }}>See It in Action</p>
+          <h2 className="mb-10" style={{ fontFamily: "'Manrope', system-ui, sans-serif", fontWeight: 700, letterSpacing: "-0.025em", fontSize: "clamp(1.75rem, 3.5vw, 2.5rem)", color: "#ffffff" }}>
+            The NORION Vision
+          </h2>
+          <div className="rounded-sm overflow-hidden" style={{ border: `1px solid rgba(255,255,255,0.1)`, aspectRatio: "16/9" }}>
+            <iframe
+              src="https://www.youtube.com/embed/6MIBsuC9REo"
+              title="NORION Power"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              style={{ width: "100%", height: "100%", border: "none" }}
+            />
+          </div>
+        </div>
+      </section>
+
       {/* ── DEVELOPMENT STATUS ── */}
       <section className="py-20 px-6 md:px-12" style={{ backgroundColor: OFFWHITE }}>
         <div className="max-w-4xl mx-auto text-center">
