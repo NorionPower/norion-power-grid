@@ -1,5 +1,6 @@
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
-import { Shield, Wrench, TrendingUp, Zap, Battery, Server, Home as HomeIcon, Tractor, TreePine, Building2, HardHat, Handshake } from "lucide-react";
+import { Shield, Wrench, TrendingUp, Zap, Battery, Server, Home as HomeIcon, Tractor, TreePine, Building2, HardHat, Handshake, X } from "lucide-react";
 
 const LANDSCAPE    = "https://media.base44.com/images/public/6a3f1f8d6e15414384333dca/dfe93afaa_79c24bbe-8bb9-4616-bf61-793c77a10af5.png";
 const INVERTER_IMG = "https://media.base44.com/images/public/6a3f1f8d6e15414384333dca/3a1cee1dc_ChatGPTImageJun26202607_08_10AM2.png";
@@ -57,10 +58,85 @@ const ALUMINUM     = "#D8DCE0";
 const STORM        = "#5E6870";
 const DEEP_BLUE    = "#123247";
 
+const modalInputStyle = {
+  width: "100%",
+  background: "#F5F6F4",
+  border: `1px solid ${ALUMINUM}`,
+  borderRadius: "2px",
+  padding: "10px 12px",
+  fontSize: "0.875rem",
+  color: GRAPHITE,
+  outline: "none",
+  fontFamily: "'Inter', system-ui, sans-serif",
+};
+
 export default function Home() {
+  const [showWaitlist, setShowWaitlist] = useState(false);
+  const [wlForm, setWlForm] = useState({ firstName: "", lastName: "", email: "", message: "" });
+
+  const handleWlChange = (e) => setWlForm({ ...wlForm, [e.target.name]: e.target.value });
+
+  const handleWlSubmit = (e) => {
+    e.preventDefault();
+    const subject = encodeURIComponent("Waitlist Request");
+    const body = encodeURIComponent(
+      `First Name: ${wlForm.firstName}\nLast Name: ${wlForm.lastName}\nEmail: ${wlForm.email}\n\nMessage:\n${wlForm.message}`
+    );
+    window.location.href = `mailto:info@norionpower.com?subject=${subject}&body=${body}`;
+    setShowWaitlist(false);
+    setWlForm({ firstName: "", lastName: "", email: "", message: "" });
+  };
+
   return (
     <div id="top" className="min-h-screen" style={{ backgroundColor: OFFWHITE, color: GRAPHITE, fontFamily: "'Inter', system-ui, sans-serif" }}>
       <Navbar />
+
+      {showWaitlist && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center px-4" style={{ backgroundColor: "rgba(17,20,23,0.6)" }}
+             onClick={() => setShowWaitlist(false)}>
+          <div className="relative w-full max-w-md rounded-sm p-8" style={{ backgroundColor: "#ffffff", border: `1px solid ${ALUMINUM}` }}
+               onClick={e => e.stopPropagation()}>
+            <button onClick={() => setShowWaitlist(false)} className="absolute top-4 right-4 p-1 transition-colors"
+                    style={{ color: STORM }} onMouseEnter={e => e.currentTarget.style.color = GRAPHITE}
+                    onMouseLeave={e => e.currentTarget.style.color = STORM}>
+              <X className="w-5 h-5" />
+            </button>
+            <p className="font-mono text-xs tracking-[0.25em] uppercase mb-2" style={{ color: BRASS }}>Early Access</p>
+            <h3 className="mb-6" style={{ fontFamily: "'Manrope', system-ui, sans-serif", fontWeight: 700, fontSize: "1.25rem", color: GRAPHITE }}>
+              Join the Waitlist
+            </h3>
+            <form onSubmit={handleWlSubmit} className="flex flex-col gap-4">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="flex flex-col gap-1.5">
+                  <label style={{ fontSize: "0.625rem", color: STORM, letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 600 }}>First Name *</label>
+                  <input name="firstName" value={wlForm.firstName} onChange={handleWlChange} required placeholder="First name" maxLength={100} style={modalInputStyle} />
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <label style={{ fontSize: "0.625rem", color: STORM, letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 600 }}>Last Name *</label>
+                  <input name="lastName" value={wlForm.lastName} onChange={handleWlChange} required placeholder="Last name" maxLength={100} style={modalInputStyle} />
+                </div>
+              </div>
+              <div className="flex flex-col gap-1.5">
+                <label style={{ fontSize: "0.625rem", color: STORM, letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 600 }}>Email *</label>
+                <input name="email" type="email" value={wlForm.email} onChange={handleWlChange} required placeholder="your@email.com" maxLength={200} style={modalInputStyle} />
+              </div>
+              <div className="flex flex-col gap-1.5">
+                <label style={{ fontSize: "0.625rem", color: STORM, letterSpacing: "0.2em", textTransform: "uppercase", fontWeight: 600 }}>Message</label>
+                <textarea name="message" value={wlForm.message} onChange={handleWlChange} rows={3}
+                  placeholder="Tell us about your interest..."
+                  maxLength={1000} style={{ ...modalInputStyle, resize: "none" }} />
+              </div>
+              <button type="submit"
+                className="mt-1 px-6 py-3 text-sm font-bold tracking-wide rounded-sm transition-colors"
+                style={{ backgroundColor: BRASS, color: GRAPHITE, fontFamily: "'Inter', system-ui, sans-serif" }}
+                onMouseEnter={e => e.currentTarget.style.backgroundColor = BRASS_HOVER}
+                onMouseLeave={e => e.currentTarget.style.backgroundColor = BRASS}>
+                Send
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
 
       {/* ── HERO ── */}
       <section className="relative flex items-end" style={{ minHeight: 700 }}>
@@ -78,13 +154,13 @@ export default function Home() {
             For people tired of rising utility bills, unstable service, and having no control over the power they depend on.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <a href="mailto:info@norionpower.com?subject=Waitlist%20Request"
-               className="inline-block px-7 py-3.5 text-sm font-bold tracking-wide rounded-sm transition-colors"
-               style={{ backgroundColor: BRASS, color: GRAPHITE }}
+            <button onClick={() => setShowWaitlist(true)}
+               className="inline-block px-7 py-3.5 text-sm font-bold tracking-wide rounded-sm transition-colors cursor-pointer"
+               style={{ backgroundColor: BRASS, color: GRAPHITE, border: "none" }}
                onMouseEnter={e => e.currentTarget.style.backgroundColor = BRASS_HOVER}
                onMouseLeave={e => e.currentTarget.style.backgroundColor = BRASS}>
               Join the Waitlist
-            </a>
+            </button>
             <a href="#installer"
                className="inline-block px-7 py-3.5 text-sm font-bold tracking-wide rounded-sm transition-colors"
                style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.45)", color: "#ffffff" }}>
@@ -252,14 +328,14 @@ export default function Home() {
             </p>
           </div>
           <div className="rounded-sm p-8 flex flex-col items-center justify-center text-center gap-4" style={{ backgroundColor: "#ffffff", border: `1px solid ${ALUMINUM}` }}>
-            <p className="text-sm" style={{ color: STORM }}>Send us an email to join the waitlist.</p>
-            <a href="mailto:info@norionpower.com?subject=Waitlist%20Request"
-               className="inline-block px-7 py-3.5 text-sm font-bold tracking-wide rounded-sm transition-colors"
-               style={{ backgroundColor: BRASS, color: GRAPHITE }}
+            <p className="text-sm" style={{ color: STORM }}>Sign up to be notified about availability and updates.</p>
+            <button onClick={() => setShowWaitlist(true)}
+               className="inline-block px-7 py-3.5 text-sm font-bold tracking-wide rounded-sm transition-colors cursor-pointer"
+               style={{ backgroundColor: BRASS, color: GRAPHITE, border: "none" }}
                onMouseEnter={e => e.currentTarget.style.backgroundColor = BRASS_HOVER}
                onMouseLeave={e => e.currentTarget.style.backgroundColor = BRASS}>
               Join the Waitlist
-            </a>
+            </button>
           </div>
         </div>
       </section>
