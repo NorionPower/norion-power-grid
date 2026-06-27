@@ -1,5 +1,4 @@
 import Navbar from "@/components/Navbar";
-import WaitlistForm from "@/components/WaitlistForm";
 import { Shield, Wrench, TrendingUp, Zap, Battery, Server, Home as HomeIcon, Tractor, TreePine, Building2, HardHat, Handshake } from "lucide-react";
 
 const LANDSCAPE    = "https://media.base44.com/images/public/6a3f1f8d6e15414384333dca/dfe93afaa_79c24bbe-8bb9-4616-bf61-793c77a10af5.png";
@@ -79,7 +78,7 @@ export default function Home() {
             For people tired of rising utility bills, unstable service, and having no control over the power they depend on.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <a href="#waitlist"
+            <a href="mailto:info@norionpower.com?subject=Waitlist%20Request"
                className="inline-block px-7 py-3.5 text-sm font-bold tracking-wide rounded-sm transition-colors"
                style={{ backgroundColor: BRASS, color: GRAPHITE }}
                onMouseEnter={e => e.currentTarget.style.backgroundColor = BRASS_HOVER}
@@ -252,8 +251,15 @@ export default function Home() {
               Be notified as NORION moves through product testing, supplier validation, installer development, and early availability.
             </p>
           </div>
-          <div className="rounded-sm p-8" style={{ backgroundColor: "#ffffff", border: `1px solid ${ALUMINUM}` }}>
-            <WaitlistForm formType="waitlist" buttonLabel="Join the Waitlist" />
+          <div className="rounded-sm p-8 flex flex-col items-center justify-center text-center gap-4" style={{ backgroundColor: "#ffffff", border: `1px solid ${ALUMINUM}` }}>
+            <p className="text-sm" style={{ color: STORM }}>Send us an email to join the waitlist.</p>
+            <a href="mailto:info@norionpower.com?subject=Waitlist%20Request"
+               className="inline-block px-7 py-3.5 text-sm font-bold tracking-wide rounded-sm transition-colors"
+               style={{ backgroundColor: BRASS, color: GRAPHITE }}
+               onMouseEnter={e => e.currentTarget.style.backgroundColor = BRASS_HOVER}
+               onMouseLeave={e => e.currentTarget.style.backgroundColor = BRASS}>
+              Join the Waitlist
+            </a>
           </div>
         </div>
       </section>
