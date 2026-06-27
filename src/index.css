@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* NORION Brand Palette */
+    --color-graphite: #111417;
+    --color-gunmetal: #242B31;
+    --color-aluminum: #D8DCE0;
+    --color-white: #FFFFFF;
+    --color-offwhite: #F5F6F4;
+    --color-brass: #B78A3C;
+    --color-brass-hover: #C99A49;
+    --color-deep-blue: #123247;
+    --color-storm: #5E6870;
+    --color-forest: #253C32;
+
+    /* Shadcn token mapping */
+    --background: 210 7% 96%;
+    --foreground: 214 16% 16%;
+    --card: 0 0% 100%;
+    --card-foreground: 214 16% 16%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 214 16% 16%;
+    --primary: 37 51% 47%;
+    --primary-foreground: 214 16% 9%;
+    --secondary: 210 7% 90%;
+    --secondary-foreground: 214 16% 16%;
+    --muted: 210 7% 90%;
+    --muted-foreground: 207 8% 40%;
+    --accent: 37 51% 47%;
+    --accent-foreground: 214 16% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 210 10% 86%;
+    --input: 210 10% 86%;
+    --ring: 37 51% 47%;
+    --chart-1: 37 51% 47%;
+    --chart-2: 207 59% 18%;
+    --chart-3: 150 21% 20%;
+    --chart-4: 207 8% 40%;
+    --chart-5: 37 51% 60%;
+    --radius: 0.25rem;
+    --font-heading: 'Manrope', system-ui, sans-serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+    --font-display: 'Manrope', system-ui, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --sidebar-background: 214 16% 9%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 37 51% 47%;
+    --sidebar-primary-foreground: 214 16% 9%;
+    --sidebar-accent: 214 10% 18%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 214 10% 18%;
+    --sidebar-ring: 37 51% 47%;
+  }
+
+  .dark {
+    --background: 214 16% 9%;
+    --foreground: 210 7% 96%;
+    --card: 213 13% 14%;
+    --card-foreground: 210 7% 96%;
+    --popover: 213 13% 14%;
+    --popover-foreground: 210 7% 96%;
+    --primary: 37 51% 47%;
+    --primary-foreground: 214 16% 9%;
+    --secondary: 214 10% 18%;
+    --secondary-foreground: 210 7% 96%;
+    --muted: 214 10% 18%;
+    --muted-foreground: 207 8% 54%;
+    --accent: 37 51% 47%;
+    --accent-foreground: 214 16% 9%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 214 10% 18%;
+    --input: 214 10% 18%;
+    --ring: 37 51% 47%;
+    --chart-1: 37 51% 47%;
+    --chart-2: 207 59% 18%;
+    --chart-3: 150 21% 20%;
+    --chart-4: 207 8% 54%;
+    --chart-5: 37 51% 60%;
+    --sidebar-background: 214 16% 9%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 37 51% 47%;
+    --sidebar-primary-foreground: 214 16% 9%;
+    --sidebar-accent: 214 10% 18%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 214 10% 18%;
+    --sidebar-ring: 37 51% 47%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body;
+  }
+}

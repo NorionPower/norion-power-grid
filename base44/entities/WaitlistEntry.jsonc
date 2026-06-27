@@ -1,0 +1,44 @@
+{
+  "name": "WaitlistEntry",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "string"
+    },
+    "state": {
+      "type": "string"
+    },
+    "interest_type": {
+      "type": "string",
+      "enum": [
+        "Homeowner",
+        "Farm / Ranch",
+        "Cabin / Remote Property",
+        "Small Business",
+        "Installer / Contractor",
+        "Other"
+      ]
+    },
+    "message": {
+      "type": "string"
+    },
+    "form_type": {
+      "type": "string",
+      "enum": [
+        "waitlist",
+        "installer",
+        "updates"
+      ]
+    }
+  },
+  "required": [
+    "name",
+    "email"
+  ]
+}
