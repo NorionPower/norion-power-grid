@@ -48,6 +48,13 @@ const products = [
     desc: "Rack-based storage configurations for larger backup-power needs and serviceable equipment-room layouts. Scalable to match the property and load requirements." },
 ];
 
+// Compact product line shown inside the hero so the offering is clear immediately
+const heroLine = [
+  { title: "Hybrid Inverters", img: INVERTER_IMG, alt: "Hybrid Inverter", tag: "Solar · battery · grid · generator" },
+  { title: "Wall Batteries",   img: WALL_BATTERY, alt: "Wall Battery",   tag: "Homes · cabins · small business" },
+  { title: "Rack Batteries",   img: RACK_BATTERY, alt: "Rack Battery",   tag: "Scalable backup for larger loads" },
+];
+
 // ── Reusable style tokens
 const BRASS        = "#B78A3C";
 const BRASS_HOVER  = "#C99A49";
@@ -139,21 +146,25 @@ export default function Home() {
       )}
 
       {/* ── HERO ── */}
-      <section className="relative flex items-end" style={{ minHeight: 700 }}>
+      <section className="relative" style={{ minHeight: 780 }}>
         <div className="absolute inset-0 bg-cover bg-no-repeat"
           style={{ backgroundImage: `url(${LANDSCAPE})`, backgroundPosition: "center right" }} />
-        <div className="absolute inset-0" style={{ background: "rgba(17,20,23,0.42)" }} />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(17,20,23,0.72) 0%, rgba(17,20,23,0.28) 55%, transparent 100%)" }} />
+        <div className="absolute inset-0" style={{ background: "rgba(17,20,23,0.5)" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(17,20,23,0.88) 0%, rgba(17,20,23,0.45) 52%, rgba(17,20,23,0.15) 100%)" }} />
+        <div className="absolute inset-x-0 bottom-0" style={{ height: 240, background: "linear-gradient(to top, rgba(17,20,23,0.96), transparent)" }} />
 
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pb-20 pt-36">
-          <p className="font-mono text-xs tracking-[0.28em] uppercase mb-5" style={{ color: BRASS }}>Energy Storage Systems</p>
-          <h1 style={{ fontFamily: "'Manrope', system-ui, sans-serif", fontWeight: 800, letterSpacing: "-0.035em", lineHeight: 1.0, color: "#ffffff", fontSize: "clamp(2.8rem, 6vw, 4.5rem)" }} className="mb-5 max-w-2xl">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12 pt-36 pb-16">
+          <div className="flex items-center gap-3 mb-5">
+            <span className="block w-8 h-0.5" style={{ backgroundColor: BRASS }} />
+            <p className="font-mono text-xs tracking-[0.28em] uppercase" style={{ color: BRASS }}>Battery &amp; Inverter Systems</p>
+          </div>
+          <h1 style={{ fontFamily: "'Manrope', system-ui, sans-serif", fontWeight: 800, letterSpacing: "-0.035em", lineHeight: 1.0, color: "#ffffff", fontSize: "clamp(2.8rem, 6vw, 4.5rem)" }} className="mb-5 max-w-3xl">
             Powering<br />Independence.
           </h1>
-          <p className="text-lg max-w-xl leading-relaxed mb-10" style={{ color: "#c8cdd2" }}>
-            For people tired of rising utility bills, unstable service, and having no control over the power they depend on.
+          <p className="text-lg max-w-2xl leading-relaxed mb-8" style={{ color: "#c8cdd2" }}>
+            NORION builds battery storage and hybrid inverter systems for rural homes, farms, cabins, and small businesses — dependable backup power for when the grid can&apos;t deliver.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4">
+          <div className="flex flex-col sm:flex-row gap-4 mb-14">
             <button onClick={() => setShowWaitlist(true)}
                className="inline-block px-7 py-3.5 text-sm font-bold tracking-wide rounded-sm transition-colors cursor-pointer"
                style={{ backgroundColor: BRASS, color: GRAPHITE, border: "none" }}
@@ -166,6 +177,26 @@ export default function Home() {
                style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.45)", color: "#ffffff" }}>
               Installer / Dealer Interest
             </a>
+          </div>
+
+          {/* Product line — makes the offering unmistakable on the first screen */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-4xl">
+            {heroLine.map(({ title, img, alt, tag }) => (
+              <a key={title} href="#platform" className="group relative flex items-center gap-4 p-4 rounded-sm overflow-hidden transition-colors"
+                 style={{ background: "rgba(17,20,23,0.55)", border: "1px solid rgba(255,255,255,0.14)", backdropFilter: "blur(4px)", textDecoration: "none" }}
+                 onMouseEnter={e => e.currentTarget.style.borderColor = BRASS}
+                 onMouseLeave={e => e.currentTarget.style.borderColor = "rgba(255,255,255,0.14)"}>
+                <span className="absolute top-0 left-0 w-full" style={{ height: 2, backgroundColor: BRASS }} />
+                <div className="flex-shrink-0 w-14 h-14 rounded-sm flex items-center justify-center overflow-hidden"
+                     style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}>
+                  <img src={img} alt={alt} className="w-full h-full object-contain p-1.5" />
+                </div>
+                <div className="flex flex-col gap-1 min-w-0">
+                  <span className="text-sm font-bold tracking-wide" style={{ fontFamily: "'Manrope', system-ui, sans-serif", color: "#ffffff" }}>{title}</span>
+                  <span className="text-xs leading-snug" style={{ color: "#9aa2a9" }}>{tag}</span>
+                </div>
+              </a>
+            ))}
           </div>
         </div>
       </section>
